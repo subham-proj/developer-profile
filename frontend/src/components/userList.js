@@ -6,9 +6,21 @@ import arrow from "../graphics/north_east.svg";
 import { useSelector } from "react-redux";
 import Loader from "../components/loader";
 
-export default function UserList() {
+export default function UserList({ searchTerm }) {
   const users = useSelector((state) => state.users);
   const { loading, error, allUsers } = users;
+
+  const filterMethod = (e) => {
+    if (searchTerm === "") {
+      return e;
+    } else if (e.id?.toLowerCase().includes(searchTerm?.toLocaleLowerCase())) {
+      return e;
+    }
+  };
+
+  const renderSuggestion = allUsers?.filter((e) => filterMethod(e));
+
+  console.log(renderSuggestion);
 
   return (
     <Container>
@@ -20,7 +32,7 @@ export default function UserList() {
         ) : (
           <>
             {users &&
-              allUsers?.map((e, idx) => (
+              renderSuggestion?.map((e, idx) => (
                 <Col
                   key={idx}
                   lg={6}

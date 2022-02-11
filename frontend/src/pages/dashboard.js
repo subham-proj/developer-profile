@@ -19,6 +19,8 @@ export default function Dashboard() {
   const users = useSelector((state) => state.users);
   const { allUsers } = users;
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [showModal, setShowModal] = useState(false);
   return (
     <div>
@@ -41,10 +43,10 @@ export default function Dashboard() {
         <p>Explore developer profiles</p>
         <hr></hr>
         <div className="searchBar_container">
-          <SearchBar />
+          <SearchBar setSearchTerm={setSearchTerm} />
         </div>
         <div className="userlist">
-          <UserList />
+          <UserList searchTerm={searchTerm} />
         </div>
         <hr></hr>
         <div id="find">

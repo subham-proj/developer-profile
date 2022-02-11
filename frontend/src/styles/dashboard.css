@@ -233,3 +233,12 @@
 }
 
 /* Footer ends */
+
+#no_result {
+  text-align: center;
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  color: #3f3d56;
+}
