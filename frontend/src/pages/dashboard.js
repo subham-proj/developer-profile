@@ -20,7 +20,6 @@ export default function Dashboard() {
   const { allUsers } = users;
 
   const [searchTerm, setSearchTerm] = useState("");
-
   const [showModal, setShowModal] = useState(false);
   return (
     <div>

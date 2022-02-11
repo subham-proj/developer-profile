@@ -20,8 +20,6 @@ export default function UserList({ searchTerm }) {
 
   const renderSuggestion = allUsers?.filter((e) => filterMethod(e));
 
-  console.log(renderSuggestion);
-
   return (
     <Container>
       <Row>
