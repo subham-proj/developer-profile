@@ -34,7 +34,7 @@
     
 2) User by Id
     - Route : `https://the-developer-repository.herokuapp.com/api/users/:id`
-        -- example : `https://the-developer-repository.herokuapp.com/api/users/subham-proj`
+        - example : `https://the-developer-repository.herokuapp.com/api/users/subham-proj`
     - Method : GET
     - example 
     ```
