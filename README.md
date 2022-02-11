@@ -1,5 +1,18 @@
 ## [The Developer Repository](https://the-developer-repository.herokuapp.com/)
 
+### Setup steps
+ 1) `git clone "https://github.com/subham-proj/developer-profile.git"` 
+ 2) `npm install` (backend packages) 
+ 3) `touch .env`
+ 4) Add this varianbles
+    `NODE_ENV=development`
+    `MONGO_URI=mongodb://localhost:27017/` (add your own database)
+ 5) `cd frontend`
+ 6) `npm install` (frontend packages)
+ 7) `cd ..` 
+ 8) `npm run dev` 
+    
+
 ### API Documentation
 
 `https://the-developer-repository.herokuapp.com/api/`
