@@ -1,9 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { getUsersReducer } from "./reducer/userReducers.js";
+import {
+  getUsersByIdReducer,
+  getUsersReducer,
+} from "./reducer/userReducers.js";
 
 const reducer = combineReducers({
   users: getUsersReducer,
+  userDetails: getUsersByIdReducer,
 });
 
 const initialState = {

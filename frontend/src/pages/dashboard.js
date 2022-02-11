@@ -21,7 +21,7 @@ export default function Dashboard() {
     <div>
       <div className="header_bg">
         <Container>
-          <div className="header">
+          <div className="banner_header">
             <div className="header_text_lg">
               <p>The Developer Repository</p>
             </div>

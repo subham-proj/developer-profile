@@ -87,7 +87,7 @@ export const getAllUsers = asyncHandler(async (req, res) => {
  */
 
 export const getUserById = asyncHandler(async (req, res) => {
-  const user = await User.find({ id: req.params.id });
+  const user = await User.findOne({ id: req.params.id });
 
   if (user) {
     res.status(200).json(user);

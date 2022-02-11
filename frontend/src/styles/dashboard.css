@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.header {
+.banner_header {
   display: flex;
   justify-content: center;
 }
@@ -18,7 +18,7 @@
   margin-right: 100px;
 }
 
-.header img {
+.banner_header img {
   width: 500px;
   height: 400px;
 }
@@ -60,12 +60,12 @@
     padding-top: 50px;
   }
 
-  .header img {
+  .banner_header img {
     width: 400px;
     height: 300px;
   }
 
-  .header {
+  .banner_header {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,7 +87,7 @@
     line-height: 49px;
   }
 
-  .header img {
+  .banner_header img {
     width: 300px;
     height: 250px;
   }
