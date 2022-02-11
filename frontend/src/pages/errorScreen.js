@@ -13,7 +13,10 @@ export default function ErrorScreen() {
         <div>
           <h1>
             Error{" "}
-            <img src="https://img.icons8.com/external-xnimrodx-blue-xnimrodx/100/000000/external-error-web-hosting-xnimrodx-blue-xnimrodx.png" />
+            <img
+              src="https://img.icons8.com/external-xnimrodx-blue-xnimrodx/100/000000/external-error-web-hosting-xnimrodx-blue-xnimrodx.png"
+              alt="loader"
+            />
           </h1>
         </div>
         <div>

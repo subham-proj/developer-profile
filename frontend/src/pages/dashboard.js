@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../styles/dashboard.css";
 import Graphic from "../graphics/undraw_dev.png";
 import { Container } from "react-bootstrap";
@@ -15,6 +15,9 @@ export default function Dashboard() {
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);
+
+  const users = useSelector((state) => state.users);
+  const { allUsers } = users;
 
   const [showModal, setShowModal] = useState(false);
   return (
@@ -45,7 +48,11 @@ export default function Dashboard() {
         </div>
         <hr></hr>
         <div id="find">
-          <span>Could not find what you were looking for</span>
+          {allUsers?.length !== 0 ? (
+            <span>Could not find what you were looking for</span>
+          ) : (
+            <span>No developers added yet</span>
+          )}
           <br />
           <button className="add_button" onClick={() => setShowModal(true)}>
             Add developer info

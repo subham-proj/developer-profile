@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Modal, Form } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Modal, Form, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Github from "../graphics/github.png";
 import Linkedin from "../graphics/linkedin.png";
@@ -8,6 +9,9 @@ import Hackerrank from "../graphics/Hackerrank.png";
 import Twitter from "../graphics/twitter.png";
 import Medium from "../graphics/Medium.png";
 
+import { addUser } from "../state/actions/userActions";
+import { FETCH_ALL_USERS_SUCCESS } from "../state/constant/userConstants.js";
+
 export default function ModalForm(props) {
   const [github, setGithub] = useState("");
   const [linkedin, setLinkedin] = useState("");
@@ -15,6 +19,8 @@ export default function ModalForm(props) {
   const [hackerrank, setHackerrank] = useState("");
   const [twitter, setTwitter] = useState("");
   const [medium, setMedium] = useState("");
+
+  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -27,14 +33,34 @@ export default function ModalForm(props) {
       medium,
     };
 
-    props.onHide();
-    setGithub("");
-    setLinkedin("");
-    setCodechef("");
-    setHackerrank("");
-    setTwitter("");
-    setMedium("");
+    dispatch(addUser(user));
   };
+
+  const users = useSelector((state) => state.users);
+  const { allUsers } = users;
+
+  const addUserData = useSelector((state) => state.addUser);
+  const { loading, error, userRes } = addUserData;
+
+  useEffect(() => {
+    if (userRes) {
+      props.onHide();
+      setGithub("");
+      setLinkedin("");
+      setCodechef("");
+      setHackerrank("");
+      setTwitter("");
+      setMedium("");
+
+      const temp = [userRes, ...allUsers];
+
+      dispatch({
+        type: FETCH_ALL_USERS_SUCCESS,
+        payload: temp,
+      });
+    }
+  }, [addUserData]);
+
   return (
     <Modal
       {...props}
@@ -49,6 +75,7 @@ export default function ModalForm(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>
               <img src={Github} width={30} height={30} alt="Github" />
@@ -58,8 +85,8 @@ export default function ModalForm(props) {
               required
               className="input_field"
               type="text"
-              onChange={(e) => setGithub(e.target.value)}
               value={github}
+              onChange={(e) => setGithub(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -134,9 +161,16 @@ export default function ModalForm(props) {
           >
             Cancel &nbsp;
           </Link>
-          <button type="submit" className="submit_btn">
-            Submit
-          </button>
+
+          {loading ? (
+            <button type="submit" disabled className="submit_btn">
+              Loading...
+            </button>
+          ) : (
+            <button type="submit" className="submit_btn">
+              Submit
+            </button>
+          )}
         </Modal.Footer>
       </Form>
     </Modal>

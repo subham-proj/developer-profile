@@ -52,14 +52,17 @@ export const addUser = asyncHandler(async (req, res) => {
     if (user) {
       res.status(201).json({
         id: user.id,
+        avatar_url: user.avatar_url,
       });
     } else {
-      res.status(500);
-      throw new Error("Oops! Something went wrong.");
+      res.status(500).json({
+        message: "Oops! Something went wrong.",
+      });
     }
   } catch (error) {
-    res.status(400);
-    throw new Error("User not found");
+    res.status(400).json({
+      message: "Invalid github username",
+    });
   }
 });
 
@@ -75,7 +78,6 @@ export const getAllUsers = asyncHandler(async (req, res) => {
     res.status(200).json(users);
   } else {
     res.status(404).json({
-      status: "Error",
       message: "User not found!",
     });
   }
@@ -93,8 +95,26 @@ export const getUserById = asyncHandler(async (req, res) => {
     res.status(200).json(user);
   } else {
     res.status(404).json({
-      status: "Error",
       message: "User not found!",
+    });
+  }
+});
+
+/**
+ * Desc : deleting users by Id
+ * Method : DELETE
+ */
+
+export const deleteUserById = asyncHandler(async (req, res) => {
+  try {
+    await User.deleteOne({ _id: req.params.id });
+
+    res.status(204).json({
+      message: "User Removed Successfully!",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Cannot remove the user now!",
     });
   }
 });

@@ -13,9 +13,12 @@ import Codechef from "../graphics/codechef.png";
 import Hackerrank from "../graphics/Hackerrank.png";
 import Twitter from "../graphics/twitter.png";
 import Medium from "../graphics/Medium.png";
+import email from "../graphics/email.svg";
 
 import { getUserById } from "../state/actions/userActions";
 import Loader from "../components/loader";
+
+import arrow from "../graphics/north_east.svg";
 
 export default function DeveloperProfile({ location }) {
   const userId = location.pathname.split("/")[2];
@@ -26,8 +29,6 @@ export default function DeveloperProfile({ location }) {
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
-
-  console.log("this is the data ==>", user);
 
   return (
     <div>
@@ -61,46 +62,80 @@ export default function DeveloperProfile({ location }) {
                     <a
                       href={`https://www.github.com/${user?.github_id}`}
                       target="_blank"
+                      rel="noreferrer"
                     >
                       <img src={Github} alt="Github" />
                     </a>
-                    <a
-                      href={`https://www.linkedin.com/in/${user?.linkedin_id}`}
-                      target="_blank"
-                    >
-                      <img src={Linkedin} alt="Linkedin" />
-                    </a>
-                    <a
-                      href={`https://www.codechef.com/users/${user?.codechef_id}`}
-                      target="_blank"
-                    >
-                      <img src={Codechef} alt="Codechef" />
-                    </a>
-                    <a
-                      href={`https://www.hackerrank.com/${user?.hackerrank_id}`}
-                      target="_blank"
-                    >
-                      <img src={Hackerrank} alt="Hackerrank" />
-                    </a>
-                    <a
-                      href={`https://www.twitter.com/${user?.twitter_id}`}
-                      target="_blank"
-                    >
-                      <img src={Twitter} alt="Twitter" />
-                    </a>
-                    <a
-                      href={`https://www.medium.com/@${user?.medium_id}`}
-                      target="_blank"
-                    >
-                      <img src={Medium} alt="Medium" />
-                    </a>
+                    {user?.linkedin_id && (
+                      <a
+                        href={`https://www.linkedin.com/in/${user?.linkedin_id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img src={Linkedin} alt="Linkedin" />
+                      </a>
+                    )}
+
+                    {user?.codechef_id && (
+                      <a
+                        href={`https://www.codechef.com/users/${user?.codechef_id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img src={Codechef} alt="Codechef" />
+                      </a>
+                    )}
+
+                    {user?.hackerrank_id && (
+                      <a
+                        href={`https://www.hackerrank.com/${user?.hackerrank_id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img src={Hackerrank} alt="Hackerrank" />
+                      </a>
+                    )}
+
+                    {user?.twitter_id && (
+                      <a
+                        href={`https://www.twitter.com/${user?.twitter_id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img src={Twitter} alt="Twitter" />
+                      </a>
+                    )}
+
+                    {user?.medium_id && (
+                      <a
+                        href={`https://www.medium.com/@${user?.medium_id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img src={Medium} alt="Medium" />
+                      </a>
+                    )}
+
+                    {user?.email && (
+                      <a
+                        href={`mailto:user?.email`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img src={email} alt="email" />
+                      </a>
+                    )}
                   </p>
                   <p id="third_line">
-                    <img src={map} alt="pointer" /> &nbsp;{user?.location}{" "}
+                    {user?.location && <img src={map} alt="pointer" />} &nbsp;
+                    {user?.location} &nbsp;&nbsp;
+                    {user?.company && (
+                      <img src={business} alt="business" />
+                    )}{" "}
+                    &nbsp; {user?.company}
                     &nbsp;&nbsp;
-                    <img src={business} alt="business" /> &nbsp; {user?.company}
-                    &nbsp;&nbsp;
-                    <img src={link} alt="link" /> &nbsp; {user?.blog}
+                    {user?.blog && <img src={link} alt="link" />} &nbsp;{" "}
+                    {user?.blog}
                   </p>
                 </Col>
               </Row>
@@ -113,8 +148,14 @@ export default function DeveloperProfile({ location }) {
               <section id="each_repo" key={idx}>
                 <Container className="repo_container">
                   <span>
-                    <a href={e.html_url} target="_blank">
+                    <a
+                      href={e.html_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
                       {e.name}
+                      <img src={arrow} id="arrow" alt="goto" />
                     </a>{" "}
                     &nbsp;&nbsp;{" "}
                     <span id="updatedAt">
@@ -129,6 +170,9 @@ export default function DeveloperProfile({ location }) {
           </div>
         </div>
       )}
+      <div className="footer">
+        <span>Made with ❤️ by Subham</span>
+      </div>
     </div>
   );
 }

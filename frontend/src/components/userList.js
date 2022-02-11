@@ -10,7 +10,6 @@ export default function UserList() {
   const users = useSelector((state) => state.users);
   const { loading, error, allUsers } = users;
 
-  console.log("Debug here===>", users);
   return (
     <Container>
       <Row>

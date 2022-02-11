@@ -1,4 +1,7 @@
 import {
+  ADD_USER_REQUEST,
+  ADD_USER_SUCCESS,
+  ADD_USER_FAIL,
   FETCH_ALL_USERS_REQUEST,
   FETCH_ALL_USERS_SUCCESS,
   FETCH_ALL_USERS_FAIL,
@@ -6,6 +9,19 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAIL,
 } from "../constant/userConstants";
+
+export const addUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADD_USER_REQUEST:
+      return { loading: true };
+    case ADD_USER_SUCCESS:
+      return { loading: false, userRes: action.payload };
+    case ADD_USER_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
 export const getUsersReducer = (state = {}, action) => {
   switch (action.type) {
